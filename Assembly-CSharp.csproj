@@ -36,6 +36,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\Script\Level.cs" />
+     <Compile Include="Assets\Script\MainCamera.cs" />
      <Compile Include="Assets\Script\Player.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.1.0b8/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
