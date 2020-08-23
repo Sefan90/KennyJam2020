@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     private float speed = 3f;
     private float jumpForce = 7f;
+    private int score = 0;
     private int layer;
     private bool alive = true;
     private SpriteRenderer spriteRenderer;
@@ -15,6 +17,7 @@ public class Player : MonoBehaviour
     public Sprite[] yellow;
     public Sprite[] blue;
     public Sprite[] green;
+    public Text text;
 
 
     float camheight;
@@ -29,13 +32,19 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            Application.LoadLevel(0);
+        }
+
         GetComponent<Rigidbody2D>().velocity = new Vector2(Input.GetAxisRaw("Horizontal")*speed, GetComponent<Rigidbody2D>().velocity.y); 
         
         if ((Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.W)) && 
         (Physics2D.Raycast(transform.position + new Vector3(-0.5f,0,0), Vector2.down, 0.5f).collider != null
         || Physics2D.Raycast(transform.position + new Vector3(0.5f,0,0), Vector2.down, 0.5f).collider != null))
         { 
-            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce); 
+            GetComponent<Rigidbody2D>().velocity = new Vector2(GetComponent<Rigidbody2D>().velocity.x, jumpForce);
+            score += 1; 
             gameObject.layer += 1;
             Sprite img = spriteRenderer.sprite;
             print(img);
@@ -63,5 +72,7 @@ public class Player : MonoBehaviour
                 gameObject.layer = layer;
             }
         }
+        text.text = "Score: "+score.ToString();
+
     }
 }
